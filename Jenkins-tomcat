@@ -17,18 +17,18 @@ pipeline{
             steps{
                 sh "mvn install"
                 
-            }
+            9}
         }
         
         stage("deploy-dev"){
             steps{
                 sshagent(['tomcat-new']) {
                 sh """
-                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  ec2-user@172.31.41.169:/home/ec2-user/apache-tomcat-9.0.71/webapps/
+                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  surya@127.0.1.1:/home/surya/source/practice/apache-tomcat-8.5.38/webapps/
                     
-                    ssh ec2-user@172.31.41.169/home/ec2-user/apache-tomcat-9.0.71/bin/shutdown.sh
+                    ssh surya@127.0.1.1/home/surya/source/practice/apache-tomcat-8.5.38/bin/shutdown.sh
                     
-                    ssh ec2-user@172.31.41.169/home/ec2-user/apache-tomcat-9.0.71/bin/startup.sh
+                    ssh surya@127.0.1.1/home/surya/source/practice/apache-tomcat-8.5.38/bin/startup.sh
                 
                 """
             }
